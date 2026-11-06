@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#4facfe,#00f2fe);
+            padding:20px;
+        }
+
+        .container{
+            width:100%;
+            max-width:700px;
+            background:white;
+            padding:35px;
+            border-radius:20px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+            color:#1e3a8a;
+            margin-bottom:25px;
+        }
+
+        form{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:20px;
+        }
+
+        .form-group{
+            display:flex;
+            flex-direction:column;
+        }
+
+        label{
+            font-weight:bold;
+            margin-bottom:8px;
+            color:#334155;
+        }
+
+        input{
+            padding:12px;
+            border:1px solid #cbd5e1;
+            border-radius:8px;
+            font-size:15px;
+            transition:0.3s;
+        }
+
+        input:focus{
+            outline:none;
+            border-color:#2563eb;
+            box-shadow:0 0 5px rgba(37,99,235,0.4);
+        }
+
+        .btn-container{
+            grid-column:1 / -1;
+        }
+
+        button{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:10px;
+            background:#2563eb;
+            color:white;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+            transform:translateY(-2px);
+        }
+
+        .result{
+            margin-top:25px;
+            padding:15px;
+            background:#eff6ff;
+            border-left:5px solid #2563eb;
+            border-radius:8px;
+            text-align:center;
+        }
+
+        .result h3{
+            color:#1e3a8a;
+        }
+
+        @media(max-width:600px){
+            form{
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🩺 Diabetes Prediction Form</h2>
+
+    <form action="/predict" method="POST">
+
+        <div class="form-group">
+            <label>Number of Pregnancies</label>
+            <input type="number" name="num_preg" step="any" required>
+        </div>
+
+        <div class="form-group">
+            <label>Glucose Concentration</label>
+            <input type="number" name="glucose_conc" step="any" required>
+        </div>
+
+        <div class="form-group">
+            <label>Diastolic Blood Pressure</label>
+            <input type="number" name="diastolic_bp" step="any" required>
+        </div>
+
+        <div class="form-group">
+            <label>Insulin</label>
+            <input type="number" name="insulin" step="any" required>
+        </div>
+
+        <div class="form-group">
+            <label>BMI</label>
+            <input type="number" name="bmi" step="any" required>
+        </div>
+
+        <div class="form-group">
+            <label>Diabetes Pedigree Function</label>
+            <input type="number" name="diab_pred" step="any" required>
+        </div>
+
+        <div class="form-group">
+            <label>Age</label>
+            <input type="number" name="age" required>
+        </div>
+
+        <div class="form-group">
+            <label>Skin Thickness</label>
+            <input type="number" name="skin" step="any" required>
+        </div>
+
+        <div class="btn-container">
+            <button type="submit">🔍 Predict Diabetes</button>
+        </div>
+
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">
+        <h3>Prediction Result</h3>
+        <p>{{ prediction_text }}</p>
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
